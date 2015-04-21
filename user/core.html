@@ -52,7 +52,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Permutation tests and confidence sets</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.1dev</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.1.dev0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -138,37 +138,22 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n</strong> : int</p>
-<blockquote>
-<div><p>The number of Bernoulli trials.</p>
-</div></blockquote>
-<p><strong>x</strong> : int</p>
-<blockquote>
-<div><p>The number of successes.</p>
-</div></blockquote>
-<p><strong>cl</strong> : float in (0, 1)</p>
-<blockquote>
-<div><p>The desired confidence level.</p>
-</div></blockquote>
-<p><strong>alternative</strong> : {&#8220;two-sided&#8221;, &#8220;less&#8221;, &#8220;greater&#8221;}</p>
-<blockquote>
-<div><p>Indicates the alternative hypothesis.</p>
-</div></blockquote>
-<p><strong>p</strong> : float in (0, 1)</p>
-<blockquote>
-<div><p>The probability of success in each trial.</p>
-</div></blockquote>
-<p><strong>**kwargs</strong> : dict</p>
-<blockquote>
-<div><p>Key word arguments</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<em>int</em>) &#8211; The number of Bernoulli trials.</li>
+<li><strong>x</strong> (<em>int</em>) &#8211; The number of successes.</li>
+<li><strong>cl</strong> (<em>float in (0, 1)</em>) &#8211; The desired confidence level.</li>
+<li><strong>alternative</strong> (<em>{&#8220;two-sided&#8221;, &#8220;less&#8221;, &#8220;greater&#8221;}</em>) &#8211; Indicates the alternative hypothesis.</li>
+<li><strong>p</strong> (<em>float in (0, 1)</em>) &#8211; The probability of success in each trial.</li>
+<li><strong>**kwargs</strong> &#8211; <p>Key word arguments</p>
+</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ci_low, ci_upp</strong> : float</p>
-<blockquote class="last">
-<div><p>lower and upper confidence level with coverage (approximately)
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">lower and upper confidence level with coverage (approximately)
 1-alpha.</p>
-</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
 </td>
 </tr>
 </tbody>
@@ -192,22 +177,21 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array-like</p>
-<p><strong>y</strong> : array-like</p>
-<p><strong>reps</strong> : int</p>
-<p><strong>prng</strong> : RandomState instance or None, optional (default=None)</p>
-<blockquote>
-<div><p>If RandomState instance, prng is the pseudorandom number generator;
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>array-like</em>) &#8211; </li>
+<li><strong>y</strong> (<em>array-like</em>) &#8211; </li>
+<li><strong>reps</strong> (<em>int</em>) &#8211; </li>
+<li><strong>prng</strong> (<em>RandomState instance or None, optional (default=None)</em>) &#8211; If RandomState instance, prng is the pseudorandom number generator;
 If None, the pseudorandom number generator is the RandomState
-instance used by <cite>np.random</cite>.</p>
-</div></blockquote>
+instance used by <cite>np.random</cite>.</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">tuple</p>
-<blockquote class="last">
-<div><p>Returns test statistic, simulations, left-sided p-value,
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Returns test statistic, simulations, left-sided p-value,
 right-sided p-value, two-sided p-value</p>
-</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
 </td>
 </tr>
 </tbody>
@@ -222,22 +206,18 @@ right-sided p-value, two-sided p-value</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>m</strong> : array-like</p>
-<blockquote>
-<div><p>A 2-d array</p>
-</div></blockquote>
-<p><strong>prng</strong> : RandomState instance or None, optional (default=None)</p>
-<blockquote>
-<div><p>If RandomState instance, prng is the pseudorandom number generator;
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>m</strong> (<em>array-like</em>) &#8211; A 2-d array</li>
+<li><strong>prng</strong> (<em>RandomState instance or None, optional (default=None)</em>) &#8211; If RandomState instance, prng is the pseudorandom number generator;
 If None, the pseudorandom number generator is the RandomState
-instance used by <cite>np.random</cite>.</p>
-</div></blockquote>
+instance used by <cite>np.random</cite>.</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
-<blockquote class="last">
-<div><p>Original matrix is permute in-place, nothing returned</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Original matrix is permute in-place, nothing returned</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
 </td>
 </tr>
 </tbody>
@@ -252,26 +232,20 @@ instance used by <cite>np.random</cite>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array-like</p>
-<blockquote>
-<div><p>A 1-d array indicating treatment.</p>
-</div></blockquote>
-<p><strong>group</strong> : array-like</p>
-<blockquote>
-<div><p>A 1-d array indicating group membership</p>
-</div></blockquote>
-<p><strong>prng</strong> : RandomState instance or None, optional (default=None)</p>
-<blockquote>
-<div><p>If RandomState instance, prng is the pseudorandom number generator;
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>array-like</em>) &#8211; A 1-d array indicating treatment.</li>
+<li><strong>group</strong> (<em>array-like</em>) &#8211; A 1-d array indicating group membership</li>
+<li><strong>prng</strong> (<em>RandomState instance or None, optional (default=None)</em>) &#8211; If RandomState instance, prng is the pseudorandom number generator;
 If None, the pseudorandom number generator is the RandomState
-instance used by <cite>np.random</cite>.</p>
-</div></blockquote>
+instance used by <cite>np.random</cite>.</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>permuted</strong> : array-like</p>
-<blockquote class="last">
-<div><p>The within group permutation of x.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>permuted</strong> &#8211;
+The within group permutation of x.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array-like</p>
 </td>
 </tr>
 </tbody>
@@ -286,8 +260,7 @@ two means, with p-value estimated by simulated random sampling with
 reps replications.</p>
 <p>Tests the hypothesis that x and y are a random partition of x,y
 against the alternative that x comes from a population with mean</p>
-<blockquote>
-<div><ol class="loweralpha simple">
+<ol class="loweralpha simple">
 <li>greater than that of the population from which y comes,
 if side = &#8216;greater&#8217;</li>
 <li>less than that of the population from which y comes,
@@ -295,58 +268,56 @@ if side = &#8216;less&#8217;</li>
 <li>different from that of the population from which y comes,
 if side = &#8216;two-sided&#8217;</li>
 </ol>
-</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array-like</p>
-<blockquote>
-<div><p>Sample 1</p>
-</div></blockquote>
-<p><strong>y</strong> : array-like</p>
-<blockquote>
-<div><p>Sample 2</p>
-</div></blockquote>
-<p><strong>reps</strong> : int</p>
-<blockquote>
-<div><p>number of repetitions</p>
-</div></blockquote>
-<p><strong>stat</strong> : {&#8216;mean&#8217;, &#8216;t&#8217;}</p>
-<blockquote>
-<div><p>If stat == &#8216;mean&#8217;, the test statistic is (mean(x) - mean(y))
-(equivalently, sum(x), since those are monotonically related)</p>
-<p>If stat == &#8216;t&#8217;, the test statistic is the two-sample t-statistic&#8211;but
-the p-value is still estimated by the randomization, approximating
-the permutation distribution.
-The t-statistic is computed using scipy.stats.ttest_ind
-# FIXME: Explanation or example of how to pass in a function,
-# instead of a str</p>
-</div></blockquote>
-<p><strong>interval</strong> : {&#8216;upper&#8217;, &#8216;lower&#8217;, &#8216;two-sided&#8217;}</p>
-<blockquote>
-<div><p>If interval == &#8216;upper&#8217;, computes an upper confidence bound on the true
-p-value based on the simulations by inverting Binomial tests.</p>
-<p>If interval == &#8216;lower&#8217;, computes a lower confidence bound on the true
-p-value based on the simulations by inverting Binomial tests.</p>
-<p>If interval == &#8216;two-sided&#8217;, computes lower and upper confidence bounds on
-the true p-value based on the simulations by inverting Binomial tests.</p>
-</div></blockquote>
-<p><strong>level</strong> : float in (0, 1)</p>
-<blockquote>
-<div><p>the confidence limit for the confidence bounds.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>array-like</em>) &#8211; Sample 1</li>
+<li><strong>y</strong> (<em>array-like</em>) &#8211; Sample 2</li>
+<li><strong>reps</strong> (<em>int</em>) &#8211; number of repetitions</li>
+<li><strong>stat</strong> (<em>{&#8216;mean&#8217;, &#8216;t&#8217;}</em>) &#8211; <p>The test statistic.</p>
+<ol class="loweralpha">
+<li>If stat == &#8216;mean&#8217;, the test statistic is (mean(x) - mean(y))
+(equivalently, sum(x), since those are monotonically related)</li>
+<li>If stat == &#8216;t&#8217;, the test statistic is the two-sample t-statistic&#8211;
+but the p-value is still estimated by the randomization,
+approximating the permutation distribution.
+The t-statistic is computed using scipy.stats.ttest_ind</li>
+<li>FIXME: Explanation or example of how to pass in a function,
+instead of a str</li>
+</ol>
+</li>
+<li><strong>interval</strong> (<em>{&#8216;upper&#8217;, &#8216;lower&#8217;, &#8216;two-sided&#8217;}</em>) &#8211; <p>The type of confidence interval</p>
+<ol class="loweralpha">
+<li>If interval == &#8216;upper&#8217;, computes an upper confidence bound on the
+true p-value based on the simulations by inverting Binomial tests.</li>
+<li>If interval == &#8216;lower&#8217;, computes a lower confidence bound on the
+true p-value based on the simulations by inverting Binomial tests.</li>
+<li>If interval == &#8216;two-sided&#8217;, computes lower and upper confidence
+bounds on the true p-value based on the simulations by inverting
+Binomial tests.</li>
+</ol>
+</li>
+<li><strong>level</strong> (<em>float in (0, 1)</em>) &#8211; the confidence limit for the confidence bounds.</li>
+</ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output</strong> : int</p>
-<blockquote class="last">
-<div><p>the estimated p-value and the test statistic, if level == False</p>
-<p>&lt;estimated p-value, confidence bound on p-value, test statistic&gt;
-if interval in {&#8216;lower&#8217;,&#8217;upper&#8217;}</p>
-<p>&lt;estimated p-value,
-[lower confidence bound, upper confidence bound], test statistic&gt;,
-if interval == &#8216;two-sided&#8217;</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><em>float</em> &#8211;
+the estimated p-value and the test statistic,</li>
+<li><em>float</em> &#8211;
+the test statistic</li>
+<li><em>tuple</em> &#8211;
+These values are only returned if <cite>level</cite> == True<ol class="loweralpha">
+<li>confidence bound on p-value,
+if interval in {&#8216;lower&#8217;,&#8217;upper&#8217;}</li>
+<li>[lower confidence bound, upper confidence bound],
+if interval == &#8216;two-sided&#8217;</li>
+</ol>
+</li>
+</ul>
+</p>
 </td>
 </tr>
 </tbody>

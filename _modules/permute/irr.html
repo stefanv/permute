@@ -50,7 +50,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           Permutation tests and confidence sets</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.1dev</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.1.dev0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -159,7 +159,7 @@
 <span class="sd">.. math:: \\rho_s \equiv \\frac{1}{N_s {R \choose 2}} \sum_{i=1}^{N_s}</span>
 <span class="sd">              \sum_{r=1}^{R-1} \sum_{v=r+1}^R 1(L_{s,i,r} = L_{s,i,v})</span>
 <span class="sd">              = \\frac{1}{N_s R(R-1)} \sum_{i=1}^{N_s}</span>
-<span class="sd">                (y_{si}(y_{si}-1) + (R-y_{si})(R-y_{si}-1).</span>
+<span class="sd">                (y_{si}(y_{si}-1) + (R-y_{si})(R-y_{si}-1)).</span>
 
 <span class="sd">That is, within each stratum, we count the number of concordant pairs of</span>
 <span class="sd">assignments. If all $R$ raters agree whether item $i$ in stratum $s$</span>
@@ -195,19 +195,19 @@
 <span class="sd">    .. math:: \\rho_s \equiv \\frac{1}{N_s {R \choose 2}} \sum_{i=1}^{N_s}</span>
 <span class="sd">              \sum_{r=1}^{R-1} \sum_{v=r+1}^R 1(L_{s,i,r} = L_{s,i,v})</span>
 <span class="sd">              = \\frac{1}{N_s R(R-1)} \sum_{i=1}^{N_s}</span>
-<span class="sd">                (y_{si}(y_{si}-1) + (R-y_{si})(R-y_{si}-1).</span>
+<span class="sd">                (y_{si}(y_{si}-1) + (R-y_{si})(R-y_{si}-1)).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    ratings : array_like</span>
-<span class="sd">             Input array of dimension [R, Ns]</span>
-<span class="sd">             Each row corresponds to the ratings given by a single rater;</span>
-<span class="sd">             columns correspond to items rated.</span>
+<span class="sd">        Input array of dimension [R, Ns]</span>
+<span class="sd">        Each row corresponds to the ratings given by a single rater;</span>
+<span class="sd">        columns correspond to items rated.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    rho_s : float</span>
-<span class="sd">           concordance of the ratings, where perfect concordance is 1.0</span>
+<span class="sd">        concordance of the ratings, where perfect concordance is 1.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">R</span><span class="p">,</span> <span class="n">Ns</span> <span class="o">=</span> <span class="n">ratings</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">ratings</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -225,18 +225,18 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    pvalues : array_like</span>
-<span class="sd">             Input array of dimension S</span>
-<span class="sd">             Each entry corresponds to the p-value for rho_s, the</span>
-<span class="sd">             concordance for the s-th stratum.</span>
+<span class="sd">        Input array of dimension S</span>
+<span class="sd">        Each entry corresponds to the p-value for $\\rho_s$, the</span>
+<span class="sd">        concordance for the s-th stratum.</span>
 <span class="sd">    size : array_like</span>
-<span class="sd">             Input array of dimension S</span>
-<span class="sd">             Each entry corresponds to the number of items, Ns,</span>
-<span class="sd">             in the s-th stratum.</span>
+<span class="sd">        Input array of dimension S</span>
+<span class="sd">        Each entry corresponds to the number of items, $N_s$,</span>
+<span class="sd">        in the s-th stratum.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    npc : float</span>
-<span class="sd">         combined test statistic</span>
+<span class="sd">        combined test statistic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="n">size</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">pvalues</span> <span class="o">*</span> <span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -246,47 +246,45 @@
                      <span class="n">keep_dist</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simulates the permutation distribution of the irr test statistic for</span>
-<span class="sd">    a matrix of ratings &lt;ratings&gt;</span>
+<span class="sd">    a matrix of ratings ``ratings``</span>
 
-<span class="sd">    If obs_ts is not null, computes the reference value of the test</span>
+<span class="sd">    If ``obs_ts`` is not ``None``, computes the reference value of the test</span>
 <span class="sd">    statistic before the first permutation. Otherwise, uses the value</span>
-<span class="sd">    obs_ts for comparison.</span>
+<span class="sd">    ``obs_ts`` for comparison.</span>
 
-<span class="sd">    If &lt;keep_dist&gt;, return the distribution of values of the test statistic;</span>
+<span class="sd">    If ``keep_dist``, return the distribution of values of the test statistic;</span>
 <span class="sd">    otherwise, return only the number of permutations for which the value of</span>
-<span class="sd">    the irr test statistic is at least as large as obs_ts.</span>
+<span class="sd">    the irr test statistic is at least as large as ``obs_ts``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    ratings : array_like</span>
 <span class="sd">              Input array of dimension [R, Ns]</span>
-
 <span class="sd">    obs_ts : float</span>
-<span class="sd">             if None, obs_ts is calculated as the value of the test statistic</span>
-<span class="sd">             for the original data</span>
-
+<span class="sd">             if None, ``obs_ts`` is calculated as the value of the test</span>
+<span class="sd">             statistic for the original data</span>
 <span class="sd">    num_perm : int</span>
 <span class="sd">           number of random permutation of the elements of each row of ratings</span>
-
 <span class="sd">    keep_dist : bool</span>
 <span class="sd">                flag for whether to store and return the array of values of</span>
 <span class="sd">                the irr test statistic</span>
 
-
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    out : dict</span>
-<span class="sd">        - obs_ts : int</span>
-<span class="sd">                 observed value of the test statistic for the input data, or</span>
-<span class="sd">                 the input value of obs_ts if obs_ts was given as input</span>
-<span class="sd">        - geq : int</span>
-<span class="sd">              number of iterations for which the test statistic was greater</span>
-<span class="sd">              than or equal to obs_ts</span>
-<span class="sd">        - num_perm : int</span>
-<span class="sd">              number of permutations</span>
-<span class="sd">        - dist : array-like</span>
-<span class="sd">               if &lt;keep_dist&gt;, the array of values of the irr test statistic</span>
-<span class="sd">               from the num_perm iterations.  Otherwise, null.</span>
+<span class="sd">    dict</span>
+<span class="sd">        A dictionary containing:</span>
+
+<span class="sd">        obs_ts : int</span>
+<span class="sd">            observed value of the test statistic for the input data, or</span>
+<span class="sd">            the input value of ``obs_ts`` if ``obs_ts`` was given as input</span>
+<span class="sd">        geq : int</span>
+<span class="sd">            number of iterations for which the test statistic was greater</span>
+<span class="sd">            than or equal to ``obs_ts``</span>
+<span class="sd">        num_perm : int</span>
+<span class="sd">            number of permutations</span>
+<span class="sd">        dist : array-like</span>
+<span class="sd">            if ``keep_dist``, the array of values of the irr test statistic</span>
+<span class="sd">            from the ``num_perm`` iterations.  Otherwise, ``None``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">ratings</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">prng</span> <span class="o">=</span> <span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -313,57 +311,54 @@
                       <span class="n">pvalues</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keep_dist</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simulates the permutation distribution of the combined NPC test statistic</span>
-<span class="sd">    for S matrices of ratings &lt;ratings&gt; corresponding to S strata</span>
+<span class="sd">    for S matrices of ratings ``ratings`` corresponding to S strata</span>
 
 <span class="sd">    If obs_ts is not null, computes the reference value of the test statistic</span>
-<span class="sd">    before the first permutation. Otherwise, uses the value obs_ts for</span>
+<span class="sd">    before the first permutation. Otherwise, uses the value ``obs_ts`` for</span>
 <span class="sd">    comparison.</span>
 
-<span class="sd">    If &lt;keep_dist&gt;, return the distribution of values of the test statistic;</span>
+<span class="sd">    If ``keep_dist``, return the distribution of values of the test statistic;</span>
 <span class="sd">    otherwise, return only the number of permutations for which the value of</span>
-<span class="sd">    the irr test statistic is at least as large as obs_ts.</span>
+<span class="sd">    the irr test statistic is at least as large as ``obs_ts``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    perm_distr : array_like</span>
-<span class="sd">                 Input array of dimension [B, S]</span>
-<span class="sd">                 Column s is the permutation distribution of rho_s,</span>
-<span class="sd">                 for s=1,...,S</span>
-
+<span class="sd">        Input array of dimension [B, S]</span>
+<span class="sd">        Column s is the permutation distribution of ``rho_s``,</span>
+<span class="sd">        for s=1,...,S</span>
 <span class="sd">    size : array_like</span>
-<span class="sd">             Input array of dimension S</span>
-<span class="sd">             Each entry corresponds to the number of items, Ns,</span>
-<span class="sd">             in the s-th stratum.</span>
-
+<span class="sd">        Input array of dimension S</span>
+<span class="sd">        Each entry corresponds to the number of items, Ns,</span>
+<span class="sd">        in the s-th stratum.</span>
 <span class="sd">    obs_npc : float</span>
-<span class="sd">             if None, obs_npc is calculated as the value of the test</span>
-<span class="sd">             statistic for the original data</span>
-
+<span class="sd">        if ``None``, ``obs_npc`` is calculated as the value of the test</span>
+<span class="sd">        statistic for the original data</span>
 <span class="sd">    pvalues : array_like</span>
-<span class="sd">             Input array of dimension S</span>
-<span class="sd">             Each entry corresponds to the p-value for rho_s, the</span>
-<span class="sd">             concordance for the s-th stratum.</span>
-
-
+<span class="sd">        Input array of dimension S</span>
+<span class="sd">        Each entry corresponds to the p-value for ``rho_s``, the</span>
+<span class="sd">        concordance for the s-th stratum.</span>
 <span class="sd">    keep_dist : bool</span>
-<span class="sd">                flag for whether to store and return the array of values</span>
-<span class="sd">                of the irr test statistic</span>
+<span class="sd">        flag for whether to store and return the array of values</span>
+<span class="sd">        of the irr test statistic</span>
 
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    out : dict</span>
-<span class="sd">        - obs_npc : float</span>
-<span class="sd">                 observed value of the test statistic for the input data, or</span>
-<span class="sd">                 the input value of obs_ts if obs_ts was given as input</span>
-<span class="sd">        - leq : int</span>
-<span class="sd">              number of iterations for which the NPC test statistic was less</span>
-<span class="sd">              than or equal to obs_npc</span>
-<span class="sd">        - num_perm : int</span>
-<span class="sd">              B</span>
-<span class="sd">        - dist : array-like</span>
-<span class="sd">               if &lt;keep_dist&gt;, the array of values of the NPC test statistic</span>
-<span class="sd">               from the num_perm iterations.  Otherwise, null.</span>
+<span class="sd">    dict</span>
+<span class="sd">        A dictionary containing:</span>
+
+<span class="sd">        obs_npc : float</span>
+<span class="sd">            observed value of the test statistic for the input data, or</span>
+<span class="sd">            the input value of ``obs_ts`` if ``obs_ts`` was given as input</span>
+<span class="sd">        leq : int</span>
+<span class="sd">            number of iterations for which the NPC test statistic was less</span>
+<span class="sd">            than or equal to ``obs_npc``</span>
+<span class="sd">        num_perm : int</span>
+<span class="sd">            number of permutations</span>
+<span class="sd">        dist : ndarray</span>
+<span class="sd">            if ``keep_dist``, the array of values of the NPC test statistic</span>
+<span class="sd">            from the ``num_perm`` iterations.  Otherwise, ``None``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c"># Throw an error if both obs_npc and pvalues are None</span>
