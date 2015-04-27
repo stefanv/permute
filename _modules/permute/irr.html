@@ -282,6 +282,8 @@
 <span class="sd">            than or equal to ``obs_ts``</span>
 <span class="sd">        num_perm : int</span>
 <span class="sd">            number of permutations</span>
+<span class="sd">        pvalue : float</span>
+<span class="sd">            geq / num_perm</span>
 <span class="sd">        dist : array-like</span>
 <span class="sd">            if ``keep_dist``, the array of values of the irr test statistic</span>
 <span class="sd">            from the ``num_perm`` iterations.  Otherwise, ``None``.</span>
@@ -304,7 +306,8 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_perm</span><span class="p">):</span>
             <span class="n">permute_rows</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">prng</span><span class="p">)</span>
             <span class="n">geq</span> <span class="o">+=</span> <span class="p">(</span><span class="n">compute_ts</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">obs_ts</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s">&quot;obs_ts&quot;</span><span class="p">:</span> <span class="n">obs_ts</span><span class="p">,</span> <span class="s">&quot;geq&quot;</span><span class="p">:</span> <span class="n">geq</span><span class="p">,</span> <span class="s">&quot;num_perm&quot;</span><span class="p">:</span> <span class="n">num_perm</span><span class="p">,</span> <span class="s">&quot;dist&quot;</span><span class="p">:</span> <span class="n">dist</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">&quot;obs_ts&quot;</span><span class="p">:</span> <span class="n">obs_ts</span><span class="p">,</span> <span class="s">&quot;geq&quot;</span><span class="p">:</span> <span class="n">geq</span><span class="p">,</span> <span class="s">&quot;num_perm&quot;</span><span class="p">:</span> <span class="n">num_perm</span><span class="p">,</span>
+            <span class="s">&quot;pvalue&quot;</span><span class="p">:</span> <span class="n">geq</span><span class="o">/</span><span class="n">num_perm</span><span class="p">,</span> <span class="s">&quot;dist&quot;</span><span class="p">:</span> <span class="n">dist</span><span class="p">}</span>
 
 </div>
 <div class="viewcode-block" id="simulate_npc_dist"><a class="viewcode-back" href="../../user/irr.html#permute.irr.simulate_npc_dist">[docs]</a><span class="k">def</span> <span class="nf">simulate_npc_dist</span><span class="p">(</span><span class="n">perm_distr</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">obs_npc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
