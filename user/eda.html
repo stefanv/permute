@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>User Guide &mdash; Permutation tests and confidence sets 0.1dev documentation</title>
+    <title>Exploratory data analysis &mdash; Permutation tests and confidence sets 0.1dev documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -30,8 +30,9 @@
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Permutation tests and confidence sets 0.1dev documentation" href="../index.html" />
-    <link rel="next" title="Overview" href="overview.html" />
-    <link rel="prev" title="Permutation tests and confidence sets" href="../index.html" />
+    <link rel="up" title="User Guide" href="index.html" />
+    <link rel="next" title="Core functions" href="core.html" />
+    <link rel="prev" title="Data sets" href="data.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -67,7 +68,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/index.html">Developer Guide</a></li>
 </ul>
 </ul>
@@ -82,7 +83,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">User Guide</a></li>
+<li><a class="reference internal" href="#">Exploratory data analysis</a></li>
 </ul>
 </ul>
 </li>
@@ -92,11 +93,11 @@
               
                 
   <li>
-    <a href="../index.html" title="Previous Chapter: Permutation tests and confidence sets"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Permutation test...</span>
+    <a href="data.html" title="Previous Chapter: Data sets"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Data sets</span>
     </a>
   </li>
   <li>
-    <a href="overview.html" title="Next Chapter: Overview"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Overview &raquo;</span>
+    <a href="core.html" title="Next Chapter: Core functions"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Core functions &raquo;</span>
     </a>
   </li>
               
@@ -126,27 +127,35 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div class="section" id="user-guide">
-<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#problems-methods">Problems/Methods:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#confidence-sets">Confidence sets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overview.html#links">Links</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">Data sets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eda.html">Exploratory data analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="core.html">Core functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stratified.html">Stratified testing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="irr.html">Interrater reliability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="npc/index.html">Permutation Tests for Complex Data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="npc/kenya.html">Kenya</a></li>
-</ul>
-</li>
-</ul>
-</div>
+  <div class="section" id="module-permute.eda">
+<span id="exploratory-data-analysis"></span><h1>Exploratory data analysis<a class="headerlink" href="#module-permute.eda" title="Permalink to this headline">¶</a></h1>
+<p>Exploratory data analysis tools.</p>
+<dl class="function">
+<dt id="permute.eda.find_consecutive_duplicate_rows">
+<code class="descclassname">permute.eda.</code><code class="descname">find_consecutive_duplicate_rows</code><span class="sig-paren">(</span><em>x</em>, <em>as_string=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/eda.html#find_consecutive_duplicate_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.eda.find_consecutive_duplicate_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find rows which are duplicated in x</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="permute.eda.find_duplicate_rows">
+<code class="descclassname">permute.eda.</code><code class="descname">find_duplicate_rows</code><span class="sig-paren">(</span><em>x</em>, <em>as_string=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/eda.html#find_duplicate_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.eda.find_duplicate_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find rows which are duplicated in x</p>
+<p class="rubric">Notes</p>
+<p>If you load a file, for example <cite>nsgk.csv</cite>, as a 2D array, say <cite>x</cite>,
+then if you found &#8216;16,20,2,8&#8217; in the list returned by
+<code class="docutils literal"><span class="pre">find_duplicate_rows(x,</span> <span class="pre">as_string=True)</span></code> you might do something like:</p>
+<blockquote>
+<div>$ grep -n &#8211;context=1 &#8216;16,20,2,8&#8217; nsgk.csv
+12512-16,15,2,8
+12513:16,20,2,8
+12514-16,45,2,8
+&#8211;
+12532-17,17,2,8
+12533:16,20,2,8
+12534-17,24,2,8</div></blockquote>
+<p><a class="reference external" href="http://stackoverflow.com/questions/8560440/removing-duplicate-columns-and-rows-from-a-numpy-2d-array">http://stackoverflow.com/questions/8560440/removing-duplicate-columns-and-rows-from-a-numpy-2d-array</a></p>
+</dd></dl>
+
 </div>
 
 
