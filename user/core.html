@@ -142,7 +142,7 @@
 <li><strong>n</strong> (<em>int</em>) &#8211; The number of Bernoulli trials.</li>
 <li><strong>x</strong> (<em>int</em>) &#8211; The number of successes.</li>
 <li><strong>cl</strong> (<em>float in (0, 1)</em>) &#8211; The desired confidence level.</li>
-<li><strong>alternative</strong> (<em>{&#8220;two-sided&#8221;, &#8220;less&#8221;, &#8220;greater&#8221;}</em>) &#8211; Indicates the alternative hypothesis.</li>
+<li><strong>alternative</strong> (<em>{&#8220;two-sided&#8221;, &#8220;lower&#8221;, &#8220;upper&#8221;}</em>) &#8211; Indicates the alternative hypothesis.</li>
 <li><strong>p</strong> (<em>float in (0, 1)</em>) &#8211; The probability of success in each trial.</li>
 <li><strong>kwargs</strong> (<em>dict</em>) &#8211; Key word arguments</li>
 </ul>
@@ -170,7 +170,7 @@
 
 <dl class="function">
 <dt id="permute.core.corr">
-<code class="descclassname">permute.core.</code><code class="descname">corr</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>reps=10000</em>, <em>prng=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/core.html#corr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.core.corr" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">permute.core.</code><code class="descname">corr</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>reps=10000</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/core.html#corr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.core.corr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulate permutation p-value for Spearman correlation coefficient</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -180,14 +180,15 @@
 <li><strong>x</strong> (<em>array-like</em>) &#8211; </li>
 <li><strong>y</strong> (<em>array-like</em>) &#8211; </li>
 <li><strong>reps</strong> (<em>int</em>) &#8211; </li>
-<li><strong>prng</strong> (<em>RandomState instance or None, optional (default=None)</em>) &#8211; If RandomState instance, prng is the pseudorandom number generator;
-If None, the pseudorandom number generator is the RandomState
-instance used by <cite>np.random</cite>.</li>
+<li><strong>seed</strong> (<em>RandomState instance or {None, int, RandomState instance}</em>) &#8211; If None, the pseudorandom number generator is the RandomState
+instance used by <cite>np.random</cite>;
+If int, seed is the seed used by the random number generator;
+If RandomState instance, seed is the pseudorandom number generator</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Returns test statistic, simulations, left-sided p-value,
-right-sided p-value, two-sided p-value</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Returns test statistic, left-sided p-value,
+right-sided p-value, two-sided p-value, simulated distribution</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
@@ -199,7 +200,7 @@ right-sided p-value, two-sided p-value</p>
 
 <dl class="function">
 <dt id="permute.core.permute_rows">
-<code class="descclassname">permute.core.</code><code class="descname">permute_rows</code><span class="sig-paren">(</span><em>m</em>, <em>prng=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/core.html#permute_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.core.permute_rows" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">permute.core.</code><code class="descname">permute_rows</code><span class="sig-paren">(</span><em>m</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/core.html#permute_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.core.permute_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Permute the rows of a matrix in-place</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -207,9 +208,10 @@ right-sided p-value, two-sided p-value</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>m</strong> (<em>array-like</em>) &#8211; A 2-d array</li>
-<li><strong>prng</strong> (<em>RandomState instance or None, optional (default=None)</em>) &#8211; If RandomState instance, prng is the pseudorandom number generator;
-If None, the pseudorandom number generator is the RandomState
-instance used by <cite>np.random</cite>.</li>
+<li><strong>seed</strong> (<em>RandomState instance or {None, int, RandomState instance}</em>) &#8211; If None, the pseudorandom number generator is the RandomState
+instance used by <cite>np.random</cite>;
+If int, seed is the seed used by the random number generator;
+If RandomState instance, seed is the pseudorandom number generator</li>
 </ul>
 </td>
 </tr>
@@ -225,7 +227,7 @@ instance used by <cite>np.random</cite>.</li>
 
 <dl class="function">
 <dt id="permute.core.permute_within_groups">
-<code class="descclassname">permute.core.</code><code class="descname">permute_within_groups</code><span class="sig-paren">(</span><em>x</em>, <em>group</em>, <em>prng=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/core.html#permute_within_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.core.permute_within_groups" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">permute.core.</code><code class="descname">permute_within_groups</code><span class="sig-paren">(</span><em>x</em>, <em>group</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/core.html#permute_within_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.core.permute_within_groups" title="Permalink to this definition">¶</a></dt>
 <dd><p>Permutation of condition within each group.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -234,9 +236,10 @@ instance used by <cite>np.random</cite>.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>x</strong> (<em>array-like</em>) &#8211; A 1-d array indicating treatment.</li>
 <li><strong>group</strong> (<em>array-like</em>) &#8211; A 1-d array indicating group membership</li>
-<li><strong>prng</strong> (<em>RandomState instance or None, optional (default=None)</em>) &#8211; If RandomState instance, prng is the pseudorandom number generator;
-If None, the pseudorandom number generator is the RandomState
-instance used by <cite>np.random</cite>.</li>
+<li><strong>seed</strong> (<em>RandomState instance or {None, int, RandomState instance}</em>) &#8211; If None, the pseudorandom number generator is the RandomState
+instance used by <cite>np.random</cite>;
+If int, seed is the seed used by the random number generator;
+If RandomState instance, seed is the pseudorandom number generator</li>
 </ul>
 </td>
 </tr>
@@ -253,7 +256,7 @@ The within group permutation of x.</p>
 
 <dl class="function">
 <dt id="permute.core.two_sample">
-<code class="descclassname">permute.core.</code><code class="descname">two_sample</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>reps=100000</em>, <em>stat='mean'</em>, <em>alternative='greater'</em>, <em>interval=False</em>, <em>level=0.95</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/core.html#two_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.core.two_sample" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">permute.core.</code><code class="descname">two_sample</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>reps=100000</em>, <em>stat='mean'</em>, <em>alternative='greater'</em>, <em>keep_dist=False</em>, <em>interval=False</em>, <em>level=0.95</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/core.html#two_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.core.two_sample" title="Permalink to this definition">¶</a></dt>
 <dd><p>One-sided or two-sided, two-sample permutation test for equality of
 two means, with p-value estimated by simulated random sampling with
 reps replications.</p>
@@ -267,6 +270,9 @@ if side = &#8216;less&#8217;</li>
 <li>different from that of the population from which y comes,
 if side = &#8216;two-sided&#8217;</li>
 </ol>
+<p>If <code class="docutils literal"><span class="pre">keep_dist</span></code>, return the distribution of values of the test statistic;
+otherwise, return only the number of permutations for which the value of
+the test statistic and p-value.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -287,6 +293,9 @@ The t-statistic is computed using scipy.stats.ttest_ind</li>
 instead of a str</li>
 </ol>
 </li>
+<li><strong>alternative</strong> (<em>{&#8216;greater&#8217;, &#8216;less&#8217;, &#8216;two-sided&#8217;}</em>) &#8211; The alternative hypothesis to test</li>
+<li><strong>keep_dist</strong> (<em>bool</em>) &#8211; flag for whether to store and return the array of values
+of the irr test statistic</li>
 <li><strong>interval</strong> (<em>{&#8216;upper&#8217;, &#8216;lower&#8217;, &#8216;two-sided&#8217;}</em>) &#8211; <p>The type of confidence interval</p>
 <ol class="loweralpha">
 <li>If interval == &#8216;upper&#8217;, computes an upper confidence bound on the
@@ -299,12 +308,16 @@ Binomial tests.</li>
 </ol>
 </li>
 <li><strong>level</strong> (<em>float in (0, 1)</em>) &#8211; the confidence limit for the confidence bounds.</li>
+<li><strong>seed</strong> (<em>RandomState instance or {None, int, RandomState instance}</em>) &#8211; If None, the pseudorandom number generator is the RandomState
+instance used by <cite>np.random</cite>;
+If int, seed is the seed used by the random number generator;
+If RandomState instance, seed is the pseudorandom number generator</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
 <li><em>float</em> &#8211;
-the estimated p-value and the test statistic,</li>
+the estimated p-value</li>
 <li><em>float</em> &#8211;
 the test statistic</li>
 <li><em>tuple</em> &#8211;

@@ -237,9 +237,10 @@ concordance of the ratings, where perfect concordance is 1.0</td>
 
 <dl class="function">
 <dt id="permute.irr.simulate_npc_dist">
-<code class="descclassname">permute.irr.</code><code class="descname">simulate_npc_dist</code><span class="sig-paren">(</span><em>perm_distr</em>, <em>size</em>, <em>obs_npc=None</em>, <em>pvalues=None</em>, <em>keep_dist=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/irr.html#simulate_npc_dist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.irr.simulate_npc_dist" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">permute.irr.</code><code class="descname">simulate_npc_dist</code><span class="sig-paren">(</span><em>perm_distr</em>, <em>size</em>, <em>obs_ts=None</em>, <em>pvalues=None</em>, <em>keep_dist=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/irr.html#simulate_npc_dist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.irr.simulate_npc_dist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulates the permutation distribution of the combined NPC test statistic
-for S matrices of ratings <code class="docutils literal"><span class="pre">ratings</span></code> corresponding to S strata</p>
+for S matrices of ratings <code class="docutils literal"><span class="pre">ratings</span></code> corresponding to S strata. The
+distribution comes from applying <code class="docutils literal"><span class="pre">simulate_ts_dist</span></code> to each of the S strata.</p>
 <p>If obs_ts is not null, computes the reference value of the test statistic
 before the first permutation. Otherwise, uses the value <code class="docutils literal"><span class="pre">obs_ts</span></code> for
 comparison.</p>
@@ -257,7 +258,7 @@ for s=1,...,S</li>
 <li><strong>size</strong> (<em>array_like</em>) &#8211; Input array of dimension S
 Each entry corresponds to the number of items, Ns,
 in the s-th stratum.</li>
-<li><strong>obs_npc</strong> (<em>float</em>) &#8211; if <code class="docutils literal"><span class="pre">None</span></code>, <code class="docutils literal"><span class="pre">obs_npc</span></code> is calculated as the value of the test
+<li><strong>obs_ts</strong> (<em>float</em>) &#8211; if <code class="docutils literal"><span class="pre">None</span></code>, <code class="docutils literal"><span class="pre">obs_npc</span></code> is calculated as the value of the test
 statistic for the original data</li>
 <li><strong>pvalues</strong> (<em>array_like</em>) &#8211; Input array of dimension S
 Each entry corresponds to the p-value for <code class="docutils literal"><span class="pre">rho_s</span></code>, the
@@ -317,6 +318,10 @@ statistic for the original data</li>
 <li><strong>num_perm</strong> (<em>int</em>) &#8211; number of random permutation of the elements of each row of ratings</li>
 <li><strong>keep_dist</strong> (<em>bool</em>) &#8211; flag for whether to store and return the array of values of
 the irr test statistic</li>
+<li><strong>seed</strong> (<em>RandomState instance or {None, int, RandomState instance}</em>) &#8211; If None, the pseudorandom number generator is the RandomState
+instance used by <cite>np.random</cite>;
+If int, seed is the seed used by the random number generator;
+If RandomState instance, seed is the pseudorandom number generator</li>
 </ul>
 </td>
 </tr>

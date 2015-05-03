@@ -319,7 +319,7 @@ categories:</p>
 function.</li>
 </ul>
 <p>So your commit message might look something like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>TEST: relax test threshold slightly
+<div class="highlight-python"><div class="highlight"><pre>TST: relax test threshold slightly
 
 Attempted fix for failure on windows test run when arrays are in fact
 very close (within 6 dp).
@@ -351,10 +351,20 @@ i.e., statement coverage should be at 100%.</p>
 </div>
 <p>This will print a report with one line for each file in <cite>permute</cite>,
 detailing the test coverage:</p>
-<div class="highlight-python"><div class="highlight"><pre>Name                                             Stmts   Exec  Cover   Missing
-------------------------------------------------------------------------------
-permute                                              0      0   100%
-...
+<div class="highlight-python"><div class="highlight"><pre>Name                 Stmts   Miss Branch BrMiss  Cover   Missing
+----------------------------------------------------------------
+permute                 43      6     10      1    87%   72, 77-88
+permute.core            55      0     30      4    95%
+permute.data            45      0      2      0   100%
+permute.eda             22      0      8      0   100%
+permute.irr             52      0     20      2    97%
+permute.stratified      44      0     16      4    93%
+----------------------------------------------------------------
+TOTAL                  261      6     86     11    95%
+----------------------------------------------------------------------
+Ran 35 tests in 37.199s
+
+OK
 </pre></div>
 </div>
 </div>
@@ -365,20 +375,20 @@ permute                                              0      0   100%
 <div class="section" id="working-with-np-random">
 <h1>Working with <code class="docutils literal"><span class="pre">np.random</span></code><a class="headerlink" href="#working-with-np-random" title="Permalink to this headline">¶</a></h1>
 <p>If you need to set a random seed, do <strong>not</strong> use <code class="docutils literal"><span class="pre">np.random.seed()</span></code>.  Using
-<code class="docutils literal"><span class="pre">np.random.seed()</span></code> can produce inconsistent results.  Instead you should create
-an instance of <code class="docutils literal"><span class="pre">np.random.RandomState()</span></code> with your chosen seed.  Here is a tiny
+<code class="docutils literal"><span class="pre">np.random.seed()</span></code> can produce inconsistent results.  Instead you should use
+<code class="xref py py-func docutils literal"><span class="pre">get_prng()</span></code> with your chosen seed.  Here is a tiny
 example of how you might create a function that generates random numbers:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">RandomState</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">permute.utils</span> <span class="kn">import</span> <span class="n">get_prng</span>
 
 <span class="k">def</span> <span class="nf">func1</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="n">prng</span> <span class="o">=</span> <span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">prng</span> <span class="o">=</span> <span class="n">get_prng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">prng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span>
 </pre></div>
 </div>
-<p>If <code class="docutils literal"><span class="pre">seed=None</span></code>, then <code class="docutils literal"><span class="pre">RandomState(seed)</span></code> will try to read data from the
+<p>If <code class="docutils literal"><span class="pre">seed=None</span></code>, then <code class="docutils literal"><span class="pre">get_prng(seed)</span></code> will try to read data from the
 system (e.g., <code class="docutils literal"><span class="pre">/dev/urandom</span></code> or the system clock) to initialize the
-pseudo-random number generator.</p>
+pseudo-random number generator.  See the docstring for more details.</p>
 </div>
 
 

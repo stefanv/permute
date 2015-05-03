@@ -183,10 +183,9 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">RandomState</span>
 
 <span class="kn">from</span> <span class="nn">.core</span> <span class="kn">import</span> <span class="n">permute_rows</span>
-
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_prng</span>
 
 <div class="viewcode-block" id="compute_ts"><a class="viewcode-back" href="../../user/irr.html#permute.irr.compute_ts">[docs]</a><span class="k">def</span> <span class="nf">compute_ts</span><span class="p">(</span><span class="n">ratings</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -268,6 +267,11 @@
 <span class="sd">    keep_dist : bool</span>
 <span class="sd">                flag for whether to store and return the array of values of</span>
 <span class="sd">                the irr test statistic</span>
+<span class="sd">    seed : RandomState instance or {None, int, RandomState instance}</span>
+<span class="sd">        If None, the pseudorandom number generator is the RandomState</span>
+<span class="sd">        instance used by `np.random`;</span>
+<span class="sd">        If int, seed is the seed used by the random number generator;</span>
+<span class="sd">        If RandomState instance, seed is the pseudorandom number generator</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -289,7 +293,7 @@
 <span class="sd">            from the ``num_perm`` iterations.  Otherwise, ``None``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">ratings</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">prng</span> <span class="o">=</span> <span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">prng</span> <span class="o">=</span> <span class="n">get_prng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">obs_ts</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">obs_ts</span> <span class="o">=</span> <span class="n">compute_ts</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -310,11 +314,12 @@
             <span class="s">&quot;pvalue&quot;</span><span class="p">:</span> <span class="n">geq</span><span class="o">/</span><span class="n">num_perm</span><span class="p">,</span> <span class="s">&quot;dist&quot;</span><span class="p">:</span> <span class="n">dist</span><span class="p">}</span>
 
 </div>
-<div class="viewcode-block" id="simulate_npc_dist"><a class="viewcode-back" href="../../user/irr.html#permute.irr.simulate_npc_dist">[docs]</a><span class="k">def</span> <span class="nf">simulate_npc_dist</span><span class="p">(</span><span class="n">perm_distr</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">obs_npc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<div class="viewcode-block" id="simulate_npc_dist"><a class="viewcode-back" href="../../user/irr.html#permute.irr.simulate_npc_dist">[docs]</a><span class="k">def</span> <span class="nf">simulate_npc_dist</span><span class="p">(</span><span class="n">perm_distr</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">obs_ts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                       <span class="n">pvalues</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keep_dist</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simulates the permutation distribution of the combined NPC test statistic</span>
-<span class="sd">    for S matrices of ratings ``ratings`` corresponding to S strata</span>
+<span class="sd">    for S matrices of ratings ``ratings`` corresponding to S strata. The </span>
+<span class="sd">    distribution comes from applying ``simulate_ts_dist`` to each of the S strata.</span>
 
 <span class="sd">    If obs_ts is not null, computes the reference value of the test statistic</span>
 <span class="sd">    before the first permutation. Otherwise, uses the value ``obs_ts`` for</span>
@@ -334,7 +339,7 @@
 <span class="sd">        Input array of dimension S</span>
 <span class="sd">        Each entry corresponds to the number of items, Ns,</span>
 <span class="sd">        in the s-th stratum.</span>
-<span class="sd">    obs_npc : float</span>
+<span class="sd">    obs_ts : float</span>
 <span class="sd">        if ``None``, ``obs_npc`` is calculated as the value of the test</span>
 <span class="sd">        statistic for the original data</span>
 <span class="sd">    pvalues : array_like</span>
@@ -364,15 +369,20 @@
 <span class="sd">            from the ``num_perm`` iterations.  Otherwise, ``None``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c"># Throw an error if both obs_npc and pvalues are None</span>
-
-    <span class="k">if</span> <span class="n">obs_npc</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">obs_npc</span> <span class="o">=</span> <span class="n">compute_inverseweight_npc</span><span class="p">(</span><span class="n">pvalues</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-
+    <span class="k">if</span> <span class="p">(</span><span class="n">obs_ts</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">pvalues</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;You must input either obs_ts or pvalues&#39;</span><span class="p">)</span>
+            
     <span class="n">r</span> <span class="o">=</span> <span class="n">perm_distr</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">shape</span>
-
+        
+    <span class="k">if</span> <span class="n">pvalues</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">S</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+            <span class="c"># count the number of permutation test stats that are less than or equal to the observed test stat</span>
+            <span class="n">pvalues</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">r</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">obs_ts</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">side</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">B</span>
+    <span class="n">obs_npc</span> <span class="o">=</span> <span class="n">compute_inverseweight_npc</span><span class="p">(</span><span class="n">pvalues</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    
     <span class="k">if</span> <span class="n">keep_dist</span><span class="p">:</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">S</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -383,13 +393,15 @@
         <span class="n">leq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span> <span class="o">&lt;=</span> <span class="n">obs_npc</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="bp">None</span>
+
         <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">S</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">leq</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
                 <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">r</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">perm_distr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="n">B</span>
             <span class="n">leq</span> <span class="o">+=</span> <span class="p">(</span><span class="n">compute_inverseweight_npc</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">obs_npc</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s">&quot;obs_npc&quot;</span><span class="p">:</span> <span class="n">obs_npc</span><span class="p">,</span> <span class="s">&quot;leq&quot;</span><span class="p">:</span> <span class="n">leq</span><span class="p">,</span> <span class="s">&quot;num_perm&quot;</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span> <span class="s">&quot;dist&quot;</span><span class="p">:</span> <span class="n">dist</span><span class="p">}</span></div>
+    <span class="k">return</span> <span class="p">{</span><span class="s">&quot;obs_npc&quot;</span><span class="p">:</span> <span class="n">obs_npc</span><span class="p">,</span> <span class="s">&quot;pvalue&quot;</span><span class="p">:</span> <span class="n">leq</span><span class="o">/</span><span class="n">B</span><span class="p">,</span> <span class="s">&quot;leq&quot;</span><span class="p">:</span> <span class="n">leq</span><span class="p">,</span> 
+            <span class="s">&quot;num_perm&quot;</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span> <span class="s">&quot;dist&quot;</span><span class="p">:</span> <span class="n">dist</span><span class="p">}</span></div>
 </pre></div>
 
     </div>

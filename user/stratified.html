@@ -158,7 +158,7 @@ computed separately in each group.</p>
 
 <dl class="function">
 <dt id="permute.stratified.sim_corr">
-<code class="descclassname">permute.stratified.</code><code class="descname">sim_corr</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>group</em>, <em>reps=10000</em>, <em>prng=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/stratified.html#sim_corr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.stratified.sim_corr" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">permute.stratified.</code><code class="descname">sim_corr</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>group</em>, <em>reps=10000</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/stratified.html#sim_corr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.stratified.sim_corr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulate permutation p-value of stratified Spearman correlation test.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -169,14 +169,15 @@ computed separately in each group.</p>
 <li><strong>y</strong> (<em>array-like</em>) &#8211; </li>
 <li><strong>group</strong> (<em>array-like</em>) &#8211; </li>
 <li><strong>reps</strong> (<em>int</em>) &#8211; </li>
-<li><strong>prng</strong> (<em>RandomState instance or None, optional (default=None)</em>) &#8211; If RandomState instance, prng is the pseudorandom number generator;
-If None, the pseudorandom number generator is the RandomState
-instance used by <cite>np.random</cite>.</li>
+<li><strong>seed</strong> (<em>RandomState instance or {None, int, RandomState instance}</em>) &#8211; If None, the pseudorandom number generator is the RandomState
+instance used by <cite>np.random</cite>;
+If int, seed is the seed used by the random number generator;
+If RandomState instance, seed is the pseudorandom number generator.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Returns test statistic, simulations, left-sided p-value,
-right-sided p-value, two-sided p-value</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Returns test statistic, left-sided p-value,
+right-sided p-value, two-sided p-value, simulated distribution</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
@@ -210,12 +211,21 @@ give the same contribution to the difference in means.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>group</strong> (<em>int</em>) &#8211; The</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>group</strong> (<em>int</em>) &#8211; The</li>
+<li><strong>seed</strong> (<em>RandomState instance or {None, int, RandomState instance}</em>) &#8211; If None, the pseudorandom number generator is the RandomState
+instance used by <cite>np.random</cite>;
+If int, seed is the seed used by the random number generator;
+If RandomState instance, seed is the pseudorandom number generator</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>permuted</strong> &#8211;
-The</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>permuted</strong> &#8211;
+The</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
 </tr>
 </tbody>
 </table>
