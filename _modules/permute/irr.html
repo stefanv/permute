@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>permute.irr &mdash; Permutation tests and confidence sets 0.1dev documentation</title>
+    <title>permute.irr &mdash; Permutation tests and confidence sets 0.1.alpha0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1dev',
+        VERSION:     '0.1.alpha0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -29,7 +29,7 @@
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Permutation tests and confidence sets 0.1dev documentation" href="../../index.html" />
+    <link rel="top" title="Permutation tests and confidence sets 0.1.alpha0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -50,7 +50,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html">
           Permutation tests and confidence sets</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.1.dev0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.1a0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -187,6 +187,7 @@
 <span class="kn">from</span> <span class="nn">.core</span> <span class="kn">import</span> <span class="n">permute_rows</span>
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">get_prng</span>
 
+
 <div class="viewcode-block" id="compute_ts"><a class="viewcode-back" href="../../user/irr.html#permute.irr.compute_ts">[docs]</a><span class="k">def</span> <span class="nf">compute_ts</span><span class="p">(</span><span class="n">ratings</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the test statistic</span>
@@ -317,17 +318,19 @@
 <div class="viewcode-block" id="simulate_npc_dist"><a class="viewcode-back" href="../../user/irr.html#permute.irr.simulate_npc_dist">[docs]</a><span class="k">def</span> <span class="nf">simulate_npc_dist</span><span class="p">(</span><span class="n">perm_distr</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">obs_ts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                       <span class="n">pvalues</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">keep_dist</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Simulates the permutation distribution of the combined NPC test statistic</span>
-<span class="sd">    for S matrices of ratings ``ratings`` corresponding to S strata. The </span>
-<span class="sd">    distribution comes from applying ``simulate_ts_dist`` to each of the S strata.</span>
+<span class="sd">    Simulates the permutation distribution of the combined NPC test</span>
+<span class="sd">    statistic for S matrices of ratings ``ratings`` corresponding to</span>
+<span class="sd">    S strata. The distribution comes from applying ``simulate_ts_dist``</span>
+<span class="sd">    to each of the S strata.</span>
 
-<span class="sd">    If obs_ts is not null, computes the reference value of the test statistic</span>
-<span class="sd">    before the first permutation. Otherwise, uses the value ``obs_ts`` for</span>
-<span class="sd">    comparison.</span>
+<span class="sd">    If obs_ts is not null, computes the reference value of the test</span>
+<span class="sd">    statistic before the first permutation. Otherwise, uses the value</span>
+<span class="sd">    ``obs_ts`` for comparison.</span>
 
-<span class="sd">    If ``keep_dist``, return the distribution of values of the test statistic;</span>
-<span class="sd">    otherwise, return only the number of permutations for which the value of</span>
-<span class="sd">    the irr test statistic is at least as large as ``obs_ts``.</span>
+<span class="sd">    If ``keep_dist``, return the distribution of values of the test</span>
+<span class="sd">    statistic; otherwise, return only the number of permutations</span>
+<span class="sd">    for which the value of the irr test statistic is at least</span>
+<span class="sd">    as large as ``obs_ts``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -371,18 +374,17 @@
 
     <span class="k">if</span> <span class="p">(</span><span class="n">obs_ts</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">pvalues</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;You must input either obs_ts or pvalues&#39;</span><span class="p">)</span>
-            
+
     <span class="n">r</span> <span class="o">=</span> <span class="n">perm_distr</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">shape</span>
-        
-    <span class="k">if</span> <span class="n">pvalues</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">S</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">pvalues</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
-            <span class="c"># count the number of permutation test stats that are less than or equal to the observed test stat</span>
-            <span class="n">pvalues</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">r</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">obs_ts</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">side</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">B</span>
+            <span class="n">pvalues</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">perm_distr</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">obs_ts</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
     <span class="n">obs_npc</span> <span class="o">=</span> <span class="n">compute_inverseweight_npc</span><span class="p">(</span><span class="n">pvalues</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-    
     <span class="k">if</span> <span class="n">keep_dist</span><span class="p">:</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">S</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -400,7 +402,7 @@
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
                 <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">r</span><span class="p">[:,</span> <span class="n">j</span><span class="p">],</span> <span class="n">perm_distr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="n">B</span>
             <span class="n">leq</span> <span class="o">+=</span> <span class="p">(</span><span class="n">compute_inverseweight_npc</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">obs_npc</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s">&quot;obs_npc&quot;</span><span class="p">:</span> <span class="n">obs_npc</span><span class="p">,</span> <span class="s">&quot;pvalue&quot;</span><span class="p">:</span> <span class="n">leq</span><span class="o">/</span><span class="n">B</span><span class="p">,</span> <span class="s">&quot;leq&quot;</span><span class="p">:</span> <span class="n">leq</span><span class="p">,</span> 
+    <span class="k">return</span> <span class="p">{</span><span class="s">&quot;obs_npc&quot;</span><span class="p">:</span> <span class="n">obs_npc</span><span class="p">,</span> <span class="s">&quot;pvalue&quot;</span><span class="p">:</span> <span class="n">leq</span><span class="o">/</span><span class="n">B</span><span class="p">,</span> <span class="s">&quot;leq&quot;</span><span class="p">:</span> <span class="n">leq</span><span class="p">,</span>
             <span class="s">&quot;num_perm&quot;</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span> <span class="s">&quot;dist&quot;</span><span class="p">:</span> <span class="n">dist</span><span class="p">}</span></div>
 </pre></div>
 

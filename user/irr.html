@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Interrater reliability &mdash; Permutation tests and confidence sets 0.1dev documentation</title>
+    <title>Interrater reliability &mdash; Permutation tests and confidence sets 0.1.alpha0 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1dev',
+        VERSION:     '0.1.alpha0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -29,7 +29,7 @@
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Permutation tests and confidence sets 0.1dev documentation" href="../index.html" />
+    <link rel="top" title="Permutation tests and confidence sets 0.1.alpha0 documentation" href="../index.html" />
     <link rel="up" title="User Guide" href="index.html" />
     <link rel="next" title="Permutation Tests for Complex Data" href="npc/index.html" />
     <link rel="prev" title="Stratified testing" href="stratified.html" />
@@ -52,7 +52,7 @@
         </button>
         <a class="navbar-brand" href="../index.html">
           Permutation tests and confidence sets</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.1.dev0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.1a0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -238,15 +238,17 @@ concordance of the ratings, where perfect concordance is 1.0</td>
 <dl class="function">
 <dt id="permute.irr.simulate_npc_dist">
 <code class="descclassname">permute.irr.</code><code class="descname">simulate_npc_dist</code><span class="sig-paren">(</span><em>perm_distr</em>, <em>size</em>, <em>obs_ts=None</em>, <em>pvalues=None</em>, <em>keep_dist=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/permute/irr.html#simulate_npc_dist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#permute.irr.simulate_npc_dist" title="Permalink to this definition">¶</a></dt>
-<dd><p>Simulates the permutation distribution of the combined NPC test statistic
-for S matrices of ratings <code class="docutils literal"><span class="pre">ratings</span></code> corresponding to S strata. The
-distribution comes from applying <code class="docutils literal"><span class="pre">simulate_ts_dist</span></code> to each of the S strata.</p>
-<p>If obs_ts is not null, computes the reference value of the test statistic
-before the first permutation. Otherwise, uses the value <code class="docutils literal"><span class="pre">obs_ts</span></code> for
-comparison.</p>
-<p>If <code class="docutils literal"><span class="pre">keep_dist</span></code>, return the distribution of values of the test statistic;
-otherwise, return only the number of permutations for which the value of
-the irr test statistic is at least as large as <code class="docutils literal"><span class="pre">obs_ts</span></code>.</p>
+<dd><p>Simulates the permutation distribution of the combined NPC test
+statistic for S matrices of ratings <code class="docutils literal"><span class="pre">ratings</span></code> corresponding to
+S strata. The distribution comes from applying <code class="docutils literal"><span class="pre">simulate_ts_dist</span></code>
+to each of the S strata.</p>
+<p>If obs_ts is not null, computes the reference value of the test
+statistic before the first permutation. Otherwise, uses the value
+<code class="docutils literal"><span class="pre">obs_ts</span></code> for comparison.</p>
+<p>If <code class="docutils literal"><span class="pre">keep_dist</span></code>, return the distribution of values of the test
+statistic; otherwise, return only the number of permutations
+for which the value of the irr test statistic is at least
+as large as <code class="docutils literal"><span class="pre">obs_ts</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
